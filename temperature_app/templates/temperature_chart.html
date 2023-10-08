@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>График температуры</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>График показаний температуры с датчика</h1>
+    <div class="chart-container">
+        <img class="chart-image" src="data:image/png;base64,{{ chart_data }}" alt="График температуры">
+    </div>
+</body>
+</html>
