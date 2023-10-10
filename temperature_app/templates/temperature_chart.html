@@ -7,8 +7,26 @@
 </head>
 <body>
     <h1>График показаний температуры с датчика</h1>
+
     <div class="chart-container">
         <img class="chart-image" src="data:image/png;base64,{{ chart_data }}" alt="График температуры">
     </div>
+
+    <script>
+    function updateChart() {
+        var chartImage = document.querySelector('.chart-image');
+        fetch('/chart_update/') // URL представления
+            .then(response => response.text())
+            .then(data => {
+                let json_data = JSON.parse(data);
+                chartImage.src = `data:image/png;base64,${json_data.chart_data}`;
+            });
+    }
+
+    // Обновление графика
+    setInterval(updateChart, 5000);
+    </script>
+
 </body>
 </html>
+
