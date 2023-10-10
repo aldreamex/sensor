@@ -24,7 +24,7 @@ def temperature_chart(request):
     return render(request, 'temperature_chart.html', context)
 
 
-def chart_update(request):
+def chart_update_data(request):
     readings = TemperatureReading.objects.order_by('-timestamp')[:5]
     chart_data = create_chart(readings)
     #json_data = json.dumps({'chart_data':chart_data})

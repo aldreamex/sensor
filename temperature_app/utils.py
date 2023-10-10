@@ -1,11 +1,11 @@
 import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
 from django.shortcuts import render
 from .models import TemperatureReading
 import pytz
+matplotlib.use('Agg')
 
 
 def create_chart(readings):
