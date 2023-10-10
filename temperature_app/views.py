@@ -4,7 +4,8 @@ from .models import TemperatureReading
 from .utils import create_chart
 
 def temperature_chart(request):
-    # Получаем последние 5 записей изменения температуры из БД
+    """Отображение графика температур"""
+
     readings = TemperatureReading.objects.order_by('-timestamp')[:5]
     chart_data = create_chart(readings)
 
@@ -16,8 +17,13 @@ def temperature_chart(request):
 
 
 def chart_update_data(request):
+    """Обновление данных на графике"""
+
     readings = TemperatureReading.objects.order_by('-timestamp')[:5]
     chart_data = create_chart(readings)
-    #json_data = json.dumps({'chart_data':chart_data})
 
-    return JsonResponse({'chart_data':chart_data}, safe=False)
+    context = {
+        'chart_data': chart_data
+    }
+
+    return JsonResponse(context, safe=False)
