@@ -7,7 +7,6 @@ from .models import TemperatureReading
 import pytz
 matplotlib.use('Agg')
 
-
 def create_chart(readings):
     timezone = pytz.timezone('Europe/Moscow')
 
