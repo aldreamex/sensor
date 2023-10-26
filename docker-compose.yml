@@ -1,0 +1,46 @@
+version: '3'
+
+services: 
+
+  sensor:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+    volumes:
+    - back_static:/home/app/sensor/static
+    - back_media:/home/app/sensor/media
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - db 
+    networks:
+      - app-network
+
+
+  db:
+    image: postgres:12-alpine
+    volumes:
+      - back_db_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.prod.db
+    restart: unless-stopped
+
+    networks:
+      - app-network
+
+
+volumes:
+  back_static:
+    external: true
+  back_media:
+    external: true
+  back_db_data:
+
+
+networks:
+  app-network:
+    external: true
