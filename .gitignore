@@ -1,1 +1,8 @@
-/venv/
+**/venv
+tasks.txt
+**/__pycache__
+**/**.pyc
+**/media
+**/.env**
+nginx.conf
+**/.idea/**
