@@ -5,4 +5,4 @@ tasks.txt
 **/media
 **/.env**
 nginx.conf
-**/.idea/**
+.idea/
