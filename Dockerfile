@@ -6,6 +6,7 @@ RUN mkdir -p /home/app
 # Install pip requirements
 RUN python -m pip install --upgrade pip
 
+RUN pip install gunicorn
 
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
