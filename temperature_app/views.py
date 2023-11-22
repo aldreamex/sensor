@@ -2,6 +2,30 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from .models import TemperatureReading
 from .utils import create_chart
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+@csrf_exempt
+def sensor_data(request):
+    """Приемка данных от датчика и сохранение в БД"""
+
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            temperature = data.get('t')
+
+            reading = TemperatureReading.objects.create(
+                temperature=temperature
+            )
+
+            return JsonResponse({'message': 'Данные успешно сохранены'}, status=200)
+
+        except json.JSONDecodeError as e:
+            return JsonResponse({'error': 'Неверный формат данных'}, status=400)
+
+    else:
+        return JsonResponse({'error': 'Метод не поддерживается'}, status=405)
+
 
 def temperature_chart(request):
     """Отображение графика температур"""
