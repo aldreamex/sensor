@@ -6,6 +6,7 @@ from django.shortcuts import render
 from .models import TemperatureReading
 import pytz
 matplotlib.use('Agg')
+import matplotlib.ticker as ticker
 
 def create_chart(readings):
     """Функция построения графика"""
@@ -22,6 +23,8 @@ def create_chart(readings):
     ax.set_title('График показаний температуры с датчика')
     ax.grid(True)
     ax.legend()
+
+    ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
 
     buffer = BytesIO()
     plt.savefig(buffer, format='png')
