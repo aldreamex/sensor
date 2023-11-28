@@ -13,10 +13,13 @@ def sensor_data(request):
         try:
             data = json.loads(request.body)
             temperature = data.get('t')
+            mac_address = data.get('mac')
 
             reading = TemperatureReading.objects.create(
-                temperature=temperature
+                temperature=temperature,
+                mac_address =mac_address
             )
+            # TemperatureReading.objects.all().delete()
 
             return JsonResponse({'message': 'Данные успешно сохранены'}, status=200)
 

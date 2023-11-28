@@ -3,4 +3,4 @@ from .models import TemperatureReading
 
 @admin.register(TemperatureReading)
 class TempAdmin(admin.ModelAdmin):
-    list_display = ['temperature', 'timestamp']
+    list_display = ['temperature', 'timestamp', 'mac_address']
